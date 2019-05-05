@@ -9,11 +9,15 @@ import { BookRepository } from '../model/book.repository';
 export class StoreComponent {
 
   selectedGenre = null;
+  booksPerPage = 4;
+  selectedPage = 1;
 
   constructor(private repository: BookRepository) { }
 
   get books(): Book[] {
-    return this.repository.getBooks(this.selectedGenre);
+    const pageIndex = (this.selectedPage - 1) * this.booksPerPage;
+    return this.repository.getBooks(this.selectedGenre)
+      .slice(pageIndex, pageIndex + this.booksPerPage);
   }
 
   get  genres(): string[] {
@@ -22,5 +26,20 @@ export class StoreComponent {
 
   changeGenre(genre?: string) {
     this.selectedGenre = genre;
+    this.changePage(1);
+  }
+
+  changePage(newPage: number) {
+    this.selectedPage = newPage;
+  }
+
+  changePageSize(size: number) {
+    this.booksPerPage = size;
+    this.changePage(1);
+  }
+
+  get pageCount(): number {
+    return Math.ceil(this.repository
+      .getBooks(this.selectedGenre).length / this.booksPerPage);
   }
 }
