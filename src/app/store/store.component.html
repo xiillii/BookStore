@@ -54,7 +54,7 @@
       </div>
       <div class="btn-group float-right">
         <button *counter="let offset of pageCount" (click)="changePage(offset)"
-                class="btn btn-outline-primary" [class.active]="offset === selectedPage">
+                class="btn btn-outline-primary" [class.active]="offset == selectedPage">
           {{offset}}
         </button>
       </div>

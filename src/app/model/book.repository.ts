@@ -11,16 +11,18 @@ export class BookRepository {
     dataSource.getBooks().subscribe(data => {
       this.books = data;
       this.genres = data.map(b => b.genre)
-        .filter((c, index, array) => array.indexOf(c) === index).sort();
+        .filter((c, index, array) => array.indexOf(c) == index).sort();
     });
   }
 
   getBooks(genre: string = null): Book[] {
-    return this.books.filter(b => genre == null || genre === b.genre);
+    return this.books.filter(b => genre == null || genre == b.genre);
   }
 
   getBook(id: number): Book {
-    return this.books.find(b => b.id === id);
+
+
+    return this.books.find(b => b.id == id);
   }
 
   getGenres(): string[] {
@@ -28,18 +30,18 @@ export class BookRepository {
   }
 
   saveBook(book: Book) {
-    if (book.id == null || book.id === 0) {
+    if (book.id == null || book.id == 0) {
       this.dataSource.saveBook(book).subscribe(p => this.books.push(p));
     } else {
       this.dataSource.updateBook(book).subscribe(b => {
-        this.books.splice(this.books.findIndex(b => b.id === book.id), 1, book);
+        this.books.splice(this.books.findIndex(b => b.id == book.id), 1, book);
       });
     }
   }
 
   deleteBook(id: number) {
     this.dataSource.deleteBook(id).subscribe(b => {
-      this.books.splice(this.books.findIndex(b => b.id === id), 1);
+      this.books.splice(this.books.findIndex(b => b.id == id), 1);
     });
   }
 }

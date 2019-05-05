@@ -14,7 +14,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngIf="cart.lines.length === 0">
+        <tr *ngIf="cart.lines.length == 0">
           <td colspan="4" class="text-center">
             Your cart is empty
           </td>
@@ -58,7 +58,7 @@
         Continue Adding Books
       </button>
       <button class="btn btn-secondary m-1" routerLink="/checkout"
-              [disabled]="cart.lines.length === 0">
+              [disabled]="cart.lines.length == 0">
         Checkout
       </button>
     </div>

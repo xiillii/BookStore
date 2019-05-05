@@ -8,9 +8,9 @@ export class Cart {
   cartPrice: number = 0;
 
   addLine(book: Book, quantity: number = 1) {
-    let line = this.lines.find(line => line.book.id === book.id);
+    let line = this.lines.find(line => line.book.id == book.id);
 
-    if (line !== undefined) {
+    if (line != undefined) {
       line.quantity += Number(quantity);
     }
     else {
@@ -21,9 +21,9 @@ export class Cart {
   }
 
   updateQuantity(book: Book, quantity: number) {
-    const line = this.lines.find(b => b.book.id === book.id);
+    const line = this.lines.find(b => b.book.id == book.id);
 
-    if (line !== undefined) {
+    if (line != undefined) {
       line.quantity = Number(quantity);
     }
 
@@ -31,7 +31,7 @@ export class Cart {
   }
 
   removeLine(id: number) {
-    const index = this.lines.findIndex(line => line.book.id === id);
+    const index = this.lines.findIndex(line => line.book.id == id);
     this.lines.splice(index, 1);
     this.recalculate();
   }

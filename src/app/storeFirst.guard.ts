@@ -9,11 +9,10 @@ export class StoreFirstGuard {
   constructor(private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    console.log('firstNavigation');
-    console.log(this.firstNavigation);
+
     if (this.firstNavigation) {
       this.firstNavigation = false;
-      if (route.component !== StoreComponent) {
+      if (route.component != StoreComponent) {
         this.router.navigateByUrl('/');
         return false;
       }
