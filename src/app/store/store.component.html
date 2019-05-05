@@ -2,6 +2,7 @@
   <div class="row">
     <div class="col bg-dark text-white">
       <a class="navbar-brand">THE BOOKSTORE</a>
+      <cart-summary></cart-summary>
     </div>
   </div>
   <div class="row">
@@ -28,7 +29,12 @@
               </span>
             </h4>
             <div class="card-text bg-white p-1">
+              <button class="btn btn-success btn-sm float-right"
+                      (click)="addBookToCart(book)">
+                Add to Cart
+              </button>
               {{book.synopsis}}
+
             </div>
 
           </div>
