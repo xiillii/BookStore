@@ -5,6 +5,7 @@ import { Book } from './book.model';
 import { Cart } from './cart.model';
 import { Order } from './order.model';
 import { map } from 'rxjs/operators';
+import { HttpHeaders } from '@angular/common/http';
 
 const PROTOCOL = 'http';
 const PORT = 3500;
@@ -35,5 +36,41 @@ export class RestDatasource {
 
       return response.success;
     }));
+  }
+
+  saveBook(book: Book): Observable<Book> {
+    return this.http.post<Book>(this.baseUrl + 'books',
+      book, this.getOptions());
+  }
+
+  updateBook(book: Book): Observable<Book> {
+    return this.http.put<Book>(`${this.baseUrl}books/${book.id}`,
+      book, this.getOptions());
+  }
+
+  deleteBook(id: number): Observable<Book> {
+    return this.http.delete<Book>(`${this.baseUrl}books/${id}`, this.getOptions());
+  }
+
+  getOrders(): Observable<Order[]> {
+    return this.http.get<Order[]>(this.baseUrl + 'orders', this.getOptions());
+  }
+
+  deleteOrder(id: number): Observable<Order> {
+    return this.http.delete<Order>(`${this.baseUrl}orders/${id}`, this.getOptions());
+  }
+
+  updateOrder(order: Order): Observable<Order> {
+    return this.http.put<Order>(`${this.baseUrl}orders/${order.id}`,
+      order, this.getOptions());
+  }
+
+
+  private getOptions() {
+    return {
+      headers: new HttpHeaders({
+        Authorization: `Bearer<${this.auth_token}>`
+      })
+    };
   }
 }
