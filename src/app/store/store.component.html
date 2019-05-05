@@ -14,6 +14,9 @@
               class="btn btn-outline-primary btn-block" (click)="changeGenre(g)">
         {{g}}
       </button>
+      <button class="btn btn-block btn-danger mt-3" routerLink="/admin">
+        Administration
+      </button>
     </div>
     <div class="col-9 p-2">
       <div *ngFor="let book of books" class="card m-1 p-1 bg-light">
